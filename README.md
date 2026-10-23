@@ -31,7 +31,7 @@ are open source under Apache-2.0, so anyone can check Geometer's records without
 | --- | --- | --- |
 | Processor | Apple silicon (M1 or later). Intel Macs are not supported in the alpha. | x86_64 or arm64 |
 | System | Tested on macOS 26. Built for macOS 12 and later, which we have not tested. | Any recent distribution; the binaries are static |
-| Containers | Docker Desktop or Colima. The app offers to set up Colima with Homebrew if neither is there. | Docker Engine, usable by your user |
+| Containers | Docker Desktop or Colima. The app offers to set up Colima with Homebrew if neither is there. | Docker Engine usable by your user, with the compose and buildx plugins (`docker compose version` and `docker buildx version` should both answer) |
 | Disk | About 2 GB free for container images and records | Same |
 
 ## Install
@@ -72,9 +72,13 @@ docker run --rm --network host \
   ghcr.io/geometerlabs/geo:<version> ci
 ```
 
-The image runs `geo` and uses the host's Docker for its sandboxes. Exit codes are the
-same as the installed `geo ci`: 0 no problem, 1 a kept check broke, 2 missing evidence,
-3 infrastructure failure.
+The image runs `geo` and uses the host's Docker for its sandboxes; it starts no Docker of
+its own. Mount the project at the same path (`-v "$PWD:$PWD"`). Host networking is
+recommended (it lets Geometer reach a model on the host, such as a local Ollama) but not
+required. Exit codes are the same as the installed `geo ci`: 0 no problem, 1 a kept check
+broke, 2 missing evidence, 3 infrastructure failure. The image runs as root, so a file it
+writes into your project (for example a kept check) belongs to root on the host; each run
+starts with empty records.
 
 ## First steps
 
