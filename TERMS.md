@@ -4,7 +4,7 @@
 
 These terms cover the Geometer programs, app and container images published in this
 repository's releases and at ghcr.io/geometerlabs ("the software"). They are offered by
-{{LICENSOR}} ("we"). The open-source verifier and schemas in
+Naval Tharun ("we"); they will pass to Geometer's company once it is registered. The open-source verifier and schemas in
 [GeometerLabs/geometer-verify](https://github.com/GeometerLabs/geometer-verify) are under
 the Apache License 2.0, not these terms. Open-source components inside the software keep
 their own licences; their notices ship with every download.
