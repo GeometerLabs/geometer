@@ -1,0 +1,28 @@
+name: Geometer missed something
+description: A problem your agent has that Geometer didn't find, or a finding you think is wrong.
+labels: [finding-quality]
+body:
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      placeholder: 0.1.0-alpha.1
+    validations:
+      required: true
+  - type: input
+    id: project
+    attributes:
+      label: Project
+      description: A public repository and commit if possible.
+  - type: textarea
+    id: expected
+    attributes:
+      label: What should Geometer have found (or not found)?
+      description: The rule your agent should keep, and what goes wrong. For example "a refund must happen at most once per request".
+    validations:
+      required: true
+  - type: textarea
+    id: saw
+    attributes:
+      label: What Geometer said
+      description: The result or finding, and what it says it did not check.

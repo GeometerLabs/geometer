@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Report a security problem privately
+    url: https://github.com/GeometerLabs/geometer/security/advisories/new
+    about: Please don't open a public issue for security problems.
+  - name: Verifier and schemas (open source)
+    url: https://github.com/GeometerLabs/geometer-verify/issues
+    about: Problems with geo-verify or the evidence and contract schemas.

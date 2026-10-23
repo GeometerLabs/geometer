@@ -1,0 +1,40 @@
+name: Something went wrong
+description: Geometer stopped, showed an error, or did something you didn't expect.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Thank you. Please don't paste secrets, customer data or code you can't share; describe it instead.
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: From `geo --version`, or Geometer → About in the app.
+      placeholder: 0.1.0-alpha.1
+    validations:
+      required: true
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      options: [macOS app, macOS terminal, Linux terminal, Docker image (CI)]
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you did, what you expected, and what happened instead. The words on the screen help most.
+    validations:
+      required: true
+  - type: input
+    id: project
+    attributes:
+      label: Project
+      description: A public repository and commit if you can share it, or the language and frameworks your agent uses.
+  - type: textarea
+    id: details
+    attributes:
+      label: Details from Under the hood (optional)
+      description: The check's log or the activity panel, if it helps. Remove anything private first.
+      render: text

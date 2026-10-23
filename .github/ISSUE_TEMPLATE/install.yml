@@ -1,0 +1,25 @@
+name: Install problem
+description: Geometer would not install, open or start, or Docker setup failed.
+labels: [install]
+body:
+  - type: dropdown
+    id: how
+    attributes:
+      label: How you installed it
+      options: [macOS app (.dmg), install.sh one-liner, tarball by hand, Docker image]
+    validations:
+      required: true
+  - type: input
+    id: system
+    attributes:
+      label: System
+      description: For example macOS 26.1 on M2, or Ubuntu 24.04 x86_64. Include your Docker or Colima version if you know it.
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: The step that failed and the exact message.
+    validations:
+      required: true
