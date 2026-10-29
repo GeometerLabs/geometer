@@ -10,7 +10,7 @@ body:
     attributes:
       label: Version
       description: From `geo --version`, or Geometer → About in the app.
-      placeholder: 0.1.0-alpha.1
+      placeholder: 0.1.0-alpha.2
     validations:
       required: true
   - type: dropdown
