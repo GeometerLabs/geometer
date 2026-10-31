@@ -25,60 +25,13 @@ are open source under Apache-2.0, so anyone can check Geometer's records without
 - "Under the hood" in the app shows its processes, containers, CPU (in cores) and the
   network activity it can see, for anyone who wants to check.
 
-## Requirements
-
-| | macOS | Linux |
-| --- | --- | --- |
-| Processor | Apple silicon (M1 or later). Intel Macs are not supported in the alpha. | x86_64 or arm64 |
-| System | Tested on macOS 26. Built for macOS 12 and later, which we have not tested. | Any recent distribution; the binaries are static |
-| Containers | Docker Desktop or Colima. The app offers to set up Colima with Homebrew if neither is there. | Docker Engine usable by your user, with the compose and buildx plugins (`docker compose version` and `docker buildx version` should both answer) |
-| Disk | About 2 GB free for container images and records | Same |
-
 ## Install
 
-### macOS: the app
-
-1. Download `Geometer-<version>-macos-arm64.dmg` from the [latest release](https://github.com/GeometerLabs/geometer/releases/latest).
-2. Open the disk image and drag **Geometer** to **Applications**.
-3. Open Geometer. The alpha is **not signed by Apple yet**, so macOS refuses to open it the
-   first time. To allow it:
-   - open **System Settings → Privacy & Security**, scroll to the message about Geometer,
-     click **Open Anyway** and confirm; or
-   - in Terminal: `xattr -dr com.apple.quarantine /Applications/Geometer.app`.
-
-   You only do this once per version. A signed app will follow once Geometer's company is
-   registered with Apple.
-
-### macOS or Linux: the terminal
-
-```sh
-curl -fsSL https://geometer.dev/install.sh | sh
-```
-
-The script picks the build for your computer, checks its SHA-256 against the release's
-`SHA256SUMS`, and installs `geo` for your user under `~/.local` (no administrator rights).
-To read it first: `curl -fsSL https://geometer.dev/install.sh -o install.sh`.
-
-Or by hand: download `geo-<version>-<os>-<arch>.tar.gz` and `SHA256SUMS` from the
-release, check it (`shasum -a 256 -c SHA256SUMS --ignore-missing` on macOS,
-`sha256sum -c SHA256SUMS --ignore-missing` on Linux), unpack it and run `./install.sh`.
-
-### Linux CI: the Docker image
-
-```sh
-docker run --rm --network host \
-  -v /var/run/docker.sock:/var/run/docker.sock \
-  -v "$PWD:$PWD" -w "$PWD" \
-  ghcr.io/geometerlabs/geo:<version> ci
-```
-
-The image runs `geo` and uses the host's Docker for its sandboxes; it starts no Docker of
-its own. Mount the project at the same path (`-v "$PWD:$PWD"`). Host networking is
-recommended (it lets Geometer reach a model on the host, such as a local Ollama) but not
-required. Exit codes are the same as the installed `geo ci`: 0 no problem, 1 a kept check
-broke, 2 missing evidence, 3 infrastructure failure. The image runs as root, so a file it
-writes into your project (for example a kept check) belongs to root on the host; each run
-starts with empty records.
+The Mac app, the terminal command for macOS and Linux, and the Docker image for Linux CI are on the
+[latest release](https://github.com/GeometerLabs/geometer/releases/latest). How to install each, what your
+computer needs, how to check a download, and how to upgrade, roll back or uninstall are on one page:
+**[geometer.dev/docs/install](https://geometer.dev/docs/install)**. CI is covered in
+[Run kept checks in CI](https://geometer.dev/docs/run-in-ci).
 
 ## First steps
 
@@ -87,15 +40,6 @@ starts with empty records.
 - **Terminal:** `geo open` opens the same workspace in your browser. `geo status` prints
   what each action of your agent may do now and the next step. `geo ci` runs your kept
   checks. `geo --help` lists every command, grouped.
-
-## Upgrade, roll back, uninstall
-
-- Upgrade: run the installer again. The previous version stays installed and your records
-  are backed up before the new version opens them.
-- Roll back: `./install.sh --rollback` from the unpacked release.
-- Uninstall: `~/.local/lib/geometer/current/uninstall.sh` removes the program and the containers,
-  networks and images Geometer created. Your records stay unless you add `--purge-records`.
-  For the app, also drag Geometer from Applications to the Bin.
 
 ## Feedback
 
